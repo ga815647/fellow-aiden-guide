@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-26T13:20:00Z",
-  "rulesSha256": "b261dda9016b0a3d872f05c332b8bd4720f021e66885f614f2feeff21c9af5ac",
+  "builtAt": "2026-09-26T13:28:47Z",
+  "rulesSha256": "fe631a38efa7d3d8aca82987fa65cf74cff616e608cecd47265154964b331a4e",
   "files": {
     ".github/workflows/pages.yml": "d187bda87ccf350902547ec95bf84d3cca407a9ef00033e3dbf95d64031446f5",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "chatgpt-instructions.md": "f535f2b964cf943595d3ac84e15a58bf8756846984371aa2586ae75f41cbd4c0",
-    "index.html": "9df0cdf7cfdbba4dc1a374f13b31b5487ffbf79cf177cbc4a48c6445f2c758c0",
-    "instructions.html": "74fbeba78ce9871782c94cb5669907133b19a9aebb3bf4da71543d731210313f",
-    "rules.md": "b261dda9016b0a3d872f05c332b8bd4720f021e66885f614f2feeff21c9af5ac",
+    "chatgpt-instructions.md": "6312e461b624c5ef368e6d43c5dd73f90a7d439da2e9adb3cb8a5a3f58d68359",
+    "index.html": "8553e2c1f04b256ffaf0126eb340169e13fdad9d6b01289afedd75d85a10bc3e",
+    "instructions.html": "a88ce733824c0f58dd95f220ac52b7493d40ad8091aa5e31a361d31dd662d2fc",
+    "rules.md": "fe631a38efa7d3d8aca82987fa65cf74cff616e608cecd47265154964b331a4e",
     "rules/00-workflow.html": "93d4876498c403b6a095fc86ac3eafbd8c8d7f3247a45ac7a38fa66fa9a737ea",
     "rules/00-workflow.md": "4c64e3a16e1e7c46f8880a2e6ce358628653b33440d8d78d72788c4d613d3d5e",
     "rules/01-profile-contract.html": "b870677c2621e81e603d52507440ea146346b22c1673d0c051604895ee9ffd6c",
@@ -23,7 +23,7 @@
     "rules/05-grinder.md": "3a8cbb2e6538a557e7d615188f61700078bf672dcdcbdf6e9f22d33ca5cb27ed",
     "rules/06-output-diagnostics.html": "3bd682461b19488b73abbbef5ec45c6a4514ea3bdbc9721a7ef5d9303f52796a",
     "rules/06-output-diagnostics.md": "2d26a728690fb84414c199b1b9b6b6626a8276620ef8c04f63a2344027a0a33d",
-    "setup.html": "d357b3c829720d60f0cbfcb8cad42326ebb59e9ca0b052476170e486d3f14c22",
+    "setup.html": "7474d8e8fe4535b328136154ae1816ed06dcaada4f7a1419a0d60cc1b8de3a6c",
     "style.css": "3c3ca6557c56b000f0c005fadf0c586996e863856541bc275d238db5313133bd"
   }
 }

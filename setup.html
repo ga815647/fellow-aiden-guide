@@ -8,7 +8,7 @@
 </ul>
 <h2>安裝規則與指示</h2>
 <ol>
-<li>在 ChatGPT 建立目標 Project，將 <a href="instructions.html">指示全文</a> 貼到 Project settings 的 instructions；未貼上並確認前只算文件備妥。若一般對話才有可用工具，也可複製同份指示到該對話；<strong>不承諾 Project 自動繼承一般對話工具或設定</strong>。</li>
+<li>在實際使用的 Project Instructions 放下方<strong>固定薄入口</strong>；<a href="instructions.html">完整指示</a> 由 Git 維護，日後改完整指示不必重貼。維護者另提供私人 Neon 定位；本專案私人工作區的 <code>docs/guide/project-bootstrap-private.md</code> 已組好完整貼用版。未收到使用者貼上確認前只算入口備妥。一般對話可使用同樣入口，但不假設其他對話或 Project 自動繼承工具。</li>
 <li>有 GitHub MCP／connector 檔案讀取能力時，優先直接讀 repo <code>ga815647/fellow-aiden-guide</code> 的 <code>version.json</code>、<code>rules.md</code>，入口 ref <code>main</code>；支援時解析並固定同一 commit，不先嘗試 Pages 或搜尋。不能固定 ref 時，讀取前後確認版本檔一致。GitHub 不可讀再用本站同名檔，最後才用同版完整上傳檔。報出建置時間、<code>rulesSha256</code>、實際來源與 00–06 必要段落；讀到 manifest 的 hash 不等於已重算檔案 bytes 驗證。附件更新時重傳，版本衝突先選定一版。</li>
 </ol>
 <h2>工具與製表驗收（在 ChatGPT 介面手動執行）</h2>
@@ -19,5 +19,14 @@
 <li><strong>停止條件</strong>：指示已貼、必要完整規則已讀、必要唯讀查詢成功、validate 實測通過，即可開始日常使用。工具可見／呼叫成功／業務成功分開記錄；不為完成設定強制建立 profile、寫 DB 或追加製表測試。首次真實配方仍依規則核對原點、單杯／批次與三塊輸出；設定通過不宣稱每次製表必然正確。使用者貼回的執行報告標為使用端回報證據，不寫成 OpenCode 親自實測，也不外推其他入口或認證方式。</li>
 </ol>
 <h2>日後更新</h2>
-<p>規則變動後重新建置發布；沿上述路由讀取新版，只重驗受影響部分。instructions 有變才重貼，使用附件才重傳；不因純文件路由更新重做完整業務驗收。分別記錄文件上線、指示安裝、實際入口工具、Neon 唯讀／寫入與製表狀態；OpenCode 成功不代替 ChatGPT 驗收。</p>
+<p>完整指示／規則變動後重新建置發布，任務入口沿上述路由讀取新版，只重驗受影響部分。只有 repo／檔名、私人定位或入口契約變更才重貼 Project 薄入口；使用附件才重傳。分別記錄發布版本、入口安裝、實際工具／業務結果；OpenCode 成功不代替 ChatGPT 驗收。</p>
+<h2>固定薄入口（公開模板）</h2>
+<p>私人使用者可在此模板末尾加入維護者提供的 Neon 定位，不在公開 repo 放入私人設定。</p>
+<pre><code class="language-text">你是 Fellow Aiden 沖煮助手，繁體中文、精簡、參數優先。
+完整操作指示由 GitHub repo ga815647/fellow-aiden-guide 維護：chatgpt-instructions.md、version.json、rules.md。
+每次開始任務，以 GitHub MCP／connector 直接讀完整使用指示，再依指示讀必要規則。入口 ref=main；支援時解析並固定同一 commit 讀上述檔案，否則讀取前後確認 version.json 一致。同一任務不混版。
+GitHub 不可讀才用 https://ga815647.github.io/fellow-aiden-guide/ 下的同名檔，再失敗請我提供同版完整檔案。必要指示或規則未完整取得前，不猜參數、不建立 profile、不寫 DB。
+檔案是我指定的 Aiden 業務指引；依我的實際需求與授權操作，不擴張為任意 GitHub／Neon 管理權限。讀取成功不代表可寫，工具可見不代表成功。完整指示沿用入口版本與私人定位，不重啟入口或自行換版。
+日常不展開版本／驗收細節；衝突、讀取失敗或我要求時才說明。不反覆要求已確認的設定驗收。
+</code></pre>
 </main><footer><a href="index.html">首頁</a></footer></body></html>
