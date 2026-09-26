@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-26T12:19:34Z",
-  "rulesSha256": "eeac31bc0a30d2e414f7a8de2217a55ac287af9e823a12d3b0902b6cf760afc8",
+  "builtAt": "2026-09-26T13:20:00Z",
+  "rulesSha256": "b261dda9016b0a3d872f05c332b8bd4720f021e66885f614f2feeff21c9af5ac",
   "files": {
     ".github/workflows/pages.yml": "d187bda87ccf350902547ec95bf84d3cca407a9ef00033e3dbf95d64031446f5",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "chatgpt-instructions.md": "8f475b5679cc968ab4a36b70f249e268ea93ab9a0a5d4cb011f863f1c31f7447",
+    "chatgpt-instructions.md": "f535f2b964cf943595d3ac84e15a58bf8756846984371aa2586ae75f41cbd4c0",
     "index.html": "9df0cdf7cfdbba4dc1a374f13b31b5487ffbf79cf177cbc4a48c6445f2c758c0",
-    "instructions.html": "64409ab1466ee965e7ad4a2eec04e8a612be54b67038cd1b767b0fcf089dd59c",
-    "rules.md": "eeac31bc0a30d2e414f7a8de2217a55ac287af9e823a12d3b0902b6cf760afc8",
+    "instructions.html": "74fbeba78ce9871782c94cb5669907133b19a9aebb3bf4da71543d731210313f",
+    "rules.md": "b261dda9016b0a3d872f05c332b8bd4720f021e66885f614f2feeff21c9af5ac",
     "rules/00-workflow.html": "93d4876498c403b6a095fc86ac3eafbd8c8d7f3247a45ac7a38fa66fa9a737ea",
     "rules/00-workflow.md": "4c64e3a16e1e7c46f8880a2e6ce358628653b33440d8d78d72788c4d613d3d5e",
     "rules/01-profile-contract.html": "b870677c2621e81e603d52507440ea146346b22c1673d0c051604895ee9ffd6c",
@@ -23,7 +23,7 @@
     "rules/05-grinder.md": "3a8cbb2e6538a557e7d615188f61700078bf672dcdcbdf6e9f22d33ca5cb27ed",
     "rules/06-output-diagnostics.html": "3bd682461b19488b73abbbef5ec45c6a4514ea3bdbc9721a7ef5d9303f52796a",
     "rules/06-output-diagnostics.md": "2d26a728690fb84414c199b1b9b6b6626a8276620ef8c04f63a2344027a0a33d",
-    "setup.html": "2f661fd40bb823b2e9a43b0cd67765cf4305c6644fcaea59ed8370f639e79741",
+    "setup.html": "d357b3c829720d60f0cbfcb8cad42326ebb59e9ca0b052476170e486d3f14c22",
     "style.css": "3c3ca6557c56b000f0c005fadf0c586996e863856541bc275d238db5313133bd"
   }
 }
