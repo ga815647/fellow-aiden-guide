@@ -1,0 +1,9 @@
+:root { font-family: system-ui, sans-serif; color-scheme: light; line-height: 1.7; }
+body { max-width: 52rem; margin: auto; padding: 1rem; color: #242424; }
+nav { display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid #ccc; }
+a { color: #075492; }
+main { overflow-wrap: anywhere; }
+pre, table { max-width: 100%; overflow-x: auto; }
+table { display: block; border-collapse: collapse; }
+th, td { border: 1px solid #aaa; padding: .25rem .6rem; white-space: nowrap; }
+footer { border-top: 1px solid #ccc; margin-top: 3rem; }

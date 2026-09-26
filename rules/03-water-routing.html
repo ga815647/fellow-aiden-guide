@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03-water-routing</title><link rel="stylesheet" href="../style.css"></head><body><nav><a href="../index.html">首頁</a> <a href="../rules.md">完整規則</a> <a href="../setup.html">設定</a> <a href="../instructions.html">Instructions</a></nav><main><h1>03 Water Routing｜水量路由（SSOT）</h1>
+<h2>模式分界（看水量、不看籃）</h2>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>水量</th>
+<th>籃</th>
+<th>預設脈衝</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>單杯 Single</td>
+<td>150–450 mL</td>
+<td>錐形（綠）</td>
+<td>3</td>
+</tr>
+<tr>
+<td>小批量 Small batch</td>
+<td>451–750 mL</td>
+<td>平底（藍）</td>
+<td>3（本系統預設；原廠 1 已撤）</td>
+</tr>
+<tr>
+<td>大批量 Large batch</td>
+<td>751–1500 mL</td>
+<td>平底（藍）</td>
+<td>3–4（依 02 水量表）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>450 mL 實體切換：錐形籃水量上限鎖 450 mL。</li>
+<li>500 mL 軟體切換：&lt;500 走單杯邏輯、&gt;500 走批量。</li>
+<li><strong>450–500 mL 是無人地帶</strong>，避開；要 ~400 mL 成品 → 平底籃設 500 mL。</li>
+</ul>
+<h2>沒給水量</h2>
+<ul>
+<li>直接用 <strong>300ml 預設</strong>（single 認真算、走版本號），不要問、不要停；標「水量 300ml（預設）」。</li>
+<li>沒講具體批次量才用 <strong>batch 600 佔位</strong>；生 brew.link 只生認真算那一條。</li>
+</ul>
+<h2>大批量提醒</h2>
+<ul>
+<li>≥751 mL：分層需攪拌（沖完搖／攪再倒）；≤500 mL 搖一下即可。</li>
+<li>磨豆機換算 751–1100ml 仍可靠；約 1100ml＋外插標 <code>~</code>，靠舌頭微調。</li>
+<li>甜蜜點：單杯 250–350（錐形）／批量 500–750（平底）。</li>
+</ul>
+<h2>小份量</h2>
+<ul>
+<li>≤450 mL 保溫差 → 直接沖進預熱馬克杯。</li>
+</ul>
+</main><footer><a href="../index.html">首頁</a></footer></body></html>
