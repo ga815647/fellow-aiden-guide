@@ -31,8 +31,21 @@ title 限 50 字元，僅英數、空格與 `!@#$%&*-+?/.,:)(`；不含 `|`。ra
 候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。`aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)` 不代替外部 MCP 驗證。使用者只問配方或僅驗證，不呼叫 `create_aiden_brew_link`；明確要求建立時 validate 通過才 create，不重複詢問已給的授權，不在工具之間重算 payload。
 
 ## 歷史 key、版本與真實回饋
+正式交付時的喝豆履歷見本檔末節；以下既有feedback事件契約保持不變。
+
 - 主線 key：`bag_id＋目標水量ml＋濾杯＋磨豆機`；主版本為該線最大版本 + 1。實驗列 `is_experiment=true`、記 `parent_version`，不占主版本。
 - event_id：主線 `bag_id|water|filter|grinder|main|vN`；實驗 `bag_id|water|filter|grinder|exp|parentV|experimentCode`。同事件只一列，寫前預查、寫後重讀。
 - 保留既有 feedback 的事件、豆包、版本、parent、時間、咖啡身分、實際水量／濾紙／磨豆機、changed_variable、使用者原話、原評分／症狀、完整 payload／hash、title、brewlink（未建可空）與實驗／收斂旗標。未知不猜。
 - 舊配方、altitude 與刻度原字串保持可讀；既有 `public` legacy 表不被新 `aiden_kb` 覆寫。來源、候選、建立連結、真正實飲各有身分，候選不當作喝過。
 - 偏好假說依 06，帶真實 feedback_id、原話與支持／反對關係。私人回饋不進公開 embedding；CIE 不呼叫、不寫入、不用其向量。
+
+## 豆款與正式Profile履歷
+入口是正式交付可用Profile：候選與完整母配方已保存、同份payload實際validate通過、要求的連結若有也已成功，且不是研究／試跑／列候選。不另外維護已購／到貨／庫存流程。
+
+- `aiden_kb.coffee_journal`：bean_key與有來源的identity，至少name、身分依據evidence。烘豆商、商品URL、lot及已核對別名aliases可記，未知保留未知。先查既有key／來源，不以同名或語意相似自動合併；商品作品與實際袋／烘焙批次分開。
+- `aiden_kb.journal_profiles`：profile_key、bean_key、candidate_key／parent、完整payload與身分快照、brew_context、實際validation、2–3個observation_questions、可空share_url／bag_id。context至少含數值water_ml及已對齊的filter／grinder；研磨、焙日及開封日有可靠資料再記。bag_id未知可空，不為建檔虛構豆包。
+- `aiden_kb.journal_feedback`：串已存在的真實feedback_id，原文／原評分仍從public.feedback讀取，不改寫或複製杯次。已喝但感受不知道也可記實飲，不能當新偏好證據；要求、預測或候選不算喝過。
+
+豆款與每個Profile各自區分 `profile_created_not_tasted`／`tasted`；舊豆有評論不表示新配方喝過。舊實飲在身分確定時可只串豆款，profile_key留NULL；未串的舊public.feedback仍要查，不能把所有舊豆猜成Kakalove。
+
+依08寫前預查key、寫後重讀，重試保留原候選／validation／問題與key，不換key躲衝突。新版本保留已喜歡版本；配方可用與履歷保存成功分開回報。新對話不要求重貼已存照片資訊／評論，只補真正缺少或衝突處。
