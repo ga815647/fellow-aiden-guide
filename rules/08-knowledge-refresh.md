@@ -15,6 +15,11 @@
 
 embedding 只用公開來源、豆款與作者意圖；私人實飲原文不送入公開 embedding。索引記模型、維度、文本版本及 hash，可重建但不能成為事實來源。
 
+### 偏好查詢的名稱對齊
+`get_preferences`目前以JSON包含關係比對情境，不會自動理解別名。查詢前先核對現行鍵值，可唯讀取得 `SELECT DISTINCT h.context FROM aiden_kb.preference_hypotheses h JOIN aiden_kb.preference_current c ON c.hypothesis_id=h.hypothesis_id`，只選與本杯實際設備／濾紙／水量相符的情境。明確同義的「原廠濾紙」可對齊已核對的 `filter:"原廠"`，「Forte BG」對齊 `grinder:"Forté BG"`；`water_ml`保留數值型別。保留使用者原話，對齊僅供本次查詢，不重寫歷史或新增假說。
+
+首次查空先檢查欄名、拼寫／重音、別名及JSON型別，依實際存在且確定同義的值修正後再查；不能把查空直接說成沒有偏好或沒有實飲。不將Mugen等不同濾紙、不同磨豆機或水量當作別名合併；未知保留未知，無法判定時說明本情境未取得證據。正規化在對話／查詢步驟完成，並非資料庫函式已新增自動別名功能。
+
 ### 雲端語意查詢交接
 先用Cloudflare connector對 `@cf/baai/bge-m3` 送本次公開搜尋文字，取得真正回傳的一列1024維向量。確認所有元素是有限數值，保持原順序；不能用全零、截短或手寫向量代替模型結果。再以Neon connector執行 `SELECT * FROM aiden_kb.search_recipes($1::text, $2::vector, $3::jsonb, $4::integer)`，參數分別為原查詢文字、完整模型向量的JSON陣列字串、篩選物件、12；connector若只收SQL字串則使用SQL值的正確引號編碼，仍將該陣列明確轉 `::vector`。不把模型回傳的外層物件直接傳進vector。無法取得或傳入向量時用NULL查文字／結構，並明示沒有做語意檢索。
 
