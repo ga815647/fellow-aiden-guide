@@ -9,8 +9,11 @@
 <h2>安裝規則與指示</h2>
 <ol>
 <li>在實際使用的 Project Instructions 放下方<strong>固定薄入口</strong>；<a href="instructions.html">完整指示</a> 由 Git 維護，日後改完整指示不必重貼。維護者另提供私人 Neon 定位；本專案私人工作區的 <code>docs/guide/project-bootstrap-private.md</code> 已組好完整貼用版。未收到使用者貼上確認前只算入口備妥。一般對話可使用同樣入口，但不假設其他對話或 Project 自動繼承工具。</li>
-<li>有 GitHub MCP／connector 檔案讀取能力時，優先直接讀 repo <code>ga815647/fellow-aiden-guide</code> 的 <code>version.json</code>、<code>rules.md</code>，入口 ref <code>main</code>；支援時解析並固定同一 commit，不先嘗試 Pages 或搜尋。不能固定 ref 時，讀取前後確認版本檔一致。GitHub 不可讀再用本站同名檔，最後才用同版完整上傳檔。報出建置時間、<code>rulesSha256</code>、實際來源與 00–06 必要段落；讀到 manifest 的 hash 不等於已重算檔案 bytes 驗證。附件更新時重傳，版本衝突先選定一版。</li>
+<li>有 GitHub MCP／connector 檔案讀取能力時，優先直接讀 repo <code>ga815647/fellow-aiden-guide</code> 的 <code>version.json</code>、<code>rules.md</code>，入口 ref <code>main</code>；支援時解析並固定同一 commit，不先嘗試 Pages 或搜尋。不能固定 ref 時，讀取前後確認版本檔一致。GitHub 不可讀再用本站同名檔，最後才用同版完整上傳檔。查核時報出建置時間、<code>rulesSha256</code>、實際來源與 00–07 中本次必要段落；讀到 manifest 的 hash 不等於已重算檔案 bytes 驗證。附件更新時重傳，版本衝突先選定一版。</li>
 </ol>
+<h2>選豆與購物車</h2>
+<p>選豆與購物依 <a href="rules/07-buying.html">07</a>，使用可用的網頁讀取／瀏覽器能力核對店家原始資料；不要求先設定 Aiden MCP 或建立配方。問「這包值得買嗎」只做選豆；明確要求加入與湊免運時，才在預算與購買量限制內操作並讀回實際購物車。網站需要登入時由使用者完成，最後由使用者結帳。若目前入口缺少網站操作能力，交付商品連結、規格數量與金額限制，不宣稱已加入；此規則發布不代表實際帳戶購物車或跨裝置同步已驗證。</p>
+<p>Git 管規則、Neon 管已定契約的業務資料、Notion 留歷史查證；CIE 已退出現行 Aiden 工作流程。日常只使用本次需要的工具。首版不新增購買／庫存資料表。</p>
 <h2>工具與製表驗收（在 ChatGPT 介面手動執行）</h2>
 <ol start="3">
 <li>依官方介面開啟 Developer mode、新增遠端 MCP app（僅在認證相容且有安全設定途徑時），在<strong>實際要使用的入口</strong>檢查 <code>validate_aiden_profile</code>、<code>create_aiden_brew_link</code> 清單。若目標 Project 不支援自訂 MCP，才驗收一般聊天備援入口並在該入口貼指示、讀規則；一般對話成功不算 Project 成功。無法安全連線時標記未驗證並停止工具驗收，不試填固定 token／query-token URL。</li>
