@@ -1,42 +1,38 @@
-# 01 Profile Contract｜輸入到 Payload（SSOT）
+# 01 Profile Contract｜身分、母配方與完整 Payload（SSOT）
 
-## 輸入門檻（阻斷欄位）
-- 必須有焙度（淺／中淺／中／中深／深；中淺中深直接查列，不插值）。
-- 必須有處理法；低因／EA／甘蔗與一般水洗分流。
-- 單一產地至少國家；混豆可用 `blend` 作身分。
-- 烘豆日有就記，缺少不阻斷。
+## 身分與未知
+商品、熟豆批次、生豆批次、實際豆包、文章與配方版本分開識別。同名新包使用新 `bag_id`。焙度保留原文；低因方式與底層處理法分開；未知保留 NULL，不用產地或風味詞補齊。
 
-## 原點決策
-1. 同包同 key 已收斂紀錄（最高）。
-2. Overlay 硬命中（焙度＋處理法同類＋國家／產區＋品種可確認同豆；低因／EA／甘蔗自成一類）。
-3. 死表冷啟（底）。
-4. Overlay 近命中只列候選；使用者明確選用前不取代死表。
+| match_type | 可成立的證據 | 不能推定的事 |
+| --- | --- | --- |
+| `same_roasted_coffee` | 明確 ID 對應，或烘豆商＋批次／lot 證據確認同一熟豆作品 | 同產區、同處理法、同品種或同名不能代替批次證據 |
+| `green_coffee_related` | 可追溯同莊園、處理廠或生豆批次關聯 | 不同烘豆商不能當同熟豆；同莊園也未必同批 |
+| `feature_analog` | 已確認特徵近似，並列出焙度／處理法／產區差異 | 缺欄不是相符，不升級成同豆 |
+| `flavor_intent` | 作者意圖／口感或風味方向近似 | 語意相似不證明豆子身分，也不是喜歡機率 |
 
-## 參數流水線
-`target volume → roast table → altitude/process overlays → single/batch grind routing → grinder conversion → legal snap → payload validation`
-每一步保存來源與中間結果；後一步不得重新推翻前一步來源。
+匹配由對話依回傳證據判斷，不由向量分數自動提升身分。搜尋結果可包含較弱候選；選用時如實說明其類型與重要差異。
+
+## 原點與改編契約
+同包同 key 的實飲喜歡版本可優先保留；新設計以一支可追溯完整母配方出發，不平均拼接多支來源。不再使用五檔焙度死表、固定海拔／處理法／風味疊加或水量研磨算術。
+
+候選保存 `candidate_key, parent_recipe_id, payload, changes, intent`；另存匹配證據、來源版本、設備情境、設計假說與驗證狀態。`changes` 是陣列，每個變動欄位恰好一筆 `field / before / after / reason`；before、after 必須分別等於母配方與候選的實際值。reason 交代目的、來源與未驗證處；沿用參數的說明可放外層設計紀錄，不偽裝成變動。資料不足不必生成。
 
 ## Canonical Profile Payload
-必須保存完整 JSON，至少包含：
-`schemaVersion, profileTitle, profileType, ratio, bloomEnabled, bloomRatio, bloomDuration, bloomTemperature, ssPulsesEnabled, ssPulsesNumber, ssPulsesInterval, ssPulseTemperatures, batchPulsesEnabled, batchPulsesNumber, batchPulsesInterval, batchPulseTemperatures, singleGrind, batchGrind, originLayer, sourceRevision`
+機器 payload 固定15欄：
+`profileType, title, ratio, bloomEnabled, bloomRatio, bloomDuration, bloomTemperature, ssPulsesEnabled, ssPulsesNumber, ssPulsesInterval, ssPulseTemperatures, batchPulsesEnabled, batchPulsesNumber, batchPulsesInterval, batchPulseTemperatures`。
 
-## 最終驗證
-- title 符合 Aiden 合法字元（英數＋`!@#$%&*-+?/.,:)(` 空格；`|` 不可用；≤50 字元）。
-- ratio／溫度／時間均在合法刻度與範圍。
-- pulse 數量等於溫度陣列長度。
-- 單杯、批次兩路完整。
-- Overview 的原點層級與實際來源一致。
-- MCP 建立前必須先通過 validate。
+`profileType` 使用0；機器名稱欄就是 `title`，validate與create沿用同名欄，不改成profileTitle或profile_title。schemaVersion、研磨建議、身分、來源版本、母配方、變更理由及驗證紀錄屬外層 metadata，不混進機器payload。既有feedback的profile_title是歷史記錄欄名，不代表工具接受這個鍵。
 
-## DB key 與版本
-- 主線 key：`bag_id＋目標水量ml＋濾杯＋磨豆機`。
-- 主線版本：前一主線最大版本 + 1；實驗列 `is_experiment=true`、記 `parent_version`，不占主版本。
-- 同名新包必須新 `bag_id`。
-- event_id（deterministic）：主線 `bag_id|water|filter|grinder|main|vN`；實驗 `bag_id|water|filter|grinder|exp|parentV|experimentCode`。同一 event_id 只一列；寫前預查、寫後重讀。
-- 每列必填：event_id、bag_id、version_number、parent_version（v1可空，實驗必填）、created_at、咖啡名、水量ml、濾杯、磨豆機、焙度、處理法、產地身分、changed_variable、實泡感想原話、症狀、評分（未明示留空）、profile_title、profile_payload、payload_hash、brewlink（未建可空）、is_converged、is_experiment。
+保存完整單杯、批次路徑；只有來源明示各段同溫才展開溫度陣列。缺少必要參數或設備映射時標未完成，不拿手沖數字或歷史死表默補。完整母配方與每項變更必須能重建最終 payload。
 
-## 不可做
-- 不從 archive 取 operational 數字。
-- CIE 已退出現行流程，不呼叫、不寫入、不作原點或品質證據。
-- 不把近 overlay 自動當原點。
-- 已生成且驗證的 payload 在工具交接時不得重新計算。
+## 驗證與工具交接
+title 限 50 字元，僅英數、空格與 `!@#$%&*-+?/.,:)(`；不含 `|`。ratio／溫度／時間須合法，pulse 數與溫度陣列長度相符，單杯／批次兩路完整。合法刻度見 06，最終完整 payload 以現有 `validate_aiden_profile` 實測判定，不把 API 合法當成好喝證據。
+
+候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。`aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)` 不代替外部 MCP 驗證。使用者只問配方或僅驗證，不呼叫 `create_aiden_brew_link`；明確要求建立時 validate 通過才 create，不重複詢問已給的授權，不在工具之間重算 payload。
+
+## 歷史 key、版本與真實回饋
+- 主線 key：`bag_id＋目標水量ml＋濾杯＋磨豆機`；主版本為該線最大版本 + 1。實驗列 `is_experiment=true`、記 `parent_version`，不占主版本。
+- event_id：主線 `bag_id|water|filter|grinder|main|vN`；實驗 `bag_id|water|filter|grinder|exp|parentV|experimentCode`。同事件只一列，寫前預查、寫後重讀。
+- 保留既有 feedback 的事件、豆包、版本、parent、時間、咖啡身分、實際水量／濾紙／磨豆機、changed_variable、使用者原話、原評分／症狀、完整 payload／hash、title、brewlink（未建可空）與實驗／收斂旗標。未知不猜。
+- 舊配方、altitude 與刻度原字串保持可讀；既有 `public` legacy 表不被新 `aiden_kb` 覆寫。來源、候選、建立連結、真正實飲各有身分，候選不當作喝過。
+- 偏好假說依 06，帶真實 feedback_id、原話與支持／反對關係。私人回饋不進公開 embedding；CIE 不呼叫、不寫入、不用其向量。
