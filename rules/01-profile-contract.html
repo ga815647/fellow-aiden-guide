@@ -44,7 +44,7 @@
 <p>保存完整單杯、批次路徑；只有來源明示各段同溫才展開溫度陣列。缺少必要參數或設備映射時標未完成，不拿手沖數字或歷史死表默補。完整母配方與每項變更必須能重建最終 payload。</p>
 <h2>驗證與工具交接</h2>
 <p>title 限 50 字元，僅英數、空格與 <code>!@#$%&amp;*-+?/.,:)(</code>；不含 <code>|</code>。ratio／溫度／時間須合法，pulse 數與溫度陣列長度相符，單杯／批次兩路完整。合法刻度見 06，最終完整 payload 以現有 <code>validate_aiden_profile</code> 實測判定，不把 API 合法當成好喝證據。</p>
-<p>候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。<code>aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)</code> 不代替外部 MCP 驗證。使用者只問配方或僅驗證，不呼叫 <code>create_aiden_brew_link</code>；明確要求建立時 validate 通過才 create，不重複詢問已給的授權，不在工具之間重算 payload。</p>
+<p>候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。<code>aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)</code> 不代替外部 MCP 驗證。使用者明確只要配方文字、僅驗證或不要建連結，不呼叫 <code>create_aiden_brew_link</code>；依 00 單貼新豆照片或明確要求連結時，validate 通過便 create，不重複詢問已給的授權，不在工具之間重算 payload。</p>
 <h2>歷史 key、版本與真實回饋</h2>
 <p>正式交付時的喝豆履歷見本檔末節；以下既有feedback事件契約保持不變。</p>
 <ul>

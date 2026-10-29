@@ -28,7 +28,7 @@
 ## 驗證與工具交接
 title 限 50 字元，僅英數、空格與 `!@#$%&*-+?/.,:)(`；不含 `|`。ratio／溫度／時間須合法，pulse 數與溫度陣列長度相符，單杯／批次兩路完整。合法刻度見 06，最終完整 payload 以現有 `validate_aiden_profile` 實測判定，不把 API 合法當成好喝證據。
 
-候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。`aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)` 不代替外部 MCP 驗證。使用者只問配方或僅驗證，不呼叫 `create_aiden_brew_link`；明確要求建立時 validate 通過才 create，不重複詢問已給的授權，不在工具之間重算 payload。
+候選以同一份 payload 驗證後才分享可執行配方；需要修正則保存新版本並重新驗證。`aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload, changes, intent)` 不代替外部 MCP 驗證。使用者明確只要配方文字、僅驗證或不要建連結，不呼叫 `create_aiden_brew_link`；依 00 單貼新豆照片或明確要求連結時，validate 通過便 create，不重複詢問已給的授權，不在工具之間重算 payload。
 
 ## 歷史 key、版本與真實回饋
 正式交付時的喝豆履歷見本檔末節；以下既有feedback事件契約保持不變。

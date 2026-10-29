@@ -9,7 +9,7 @@
 
 ## 搜尋與寫入 API
 - `aiden_kb.search_recipes(query_text text, query_embedding vector optional, filters jsonb default {}, result_limit int default 12)`：回傳完整配方 payload 與來源／身分證據。query_embedding 可省略／NULL，文字與結構搜尋仍可用；需要語意時以指定模型產生查詢向量。匹配類型由對話依 01 判斷；排序分數不是好喝機率。
-- `aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload jsonb, changes jsonb, intent text)`：保存完整候選及逐參數理由；分享前另以現有 Aiden MCP 驗證同份 payload，不把 SQL 儲存當外部驗證。明確建連結才 create。
+- `aiden_kb.record_candidate(candidate_key, parent_recipe_id, payload jsonb, changes jsonb, intent text)`：保存完整候選及逐參數理由；分享前另以現有 Aiden MCP 驗證同份 payload，不把 SQL 儲存當外部驗證。新豆照片單貼或明確建連結時，validate 通過才 create；明示僅研究／只看參數／僅驗證則不 create。
 - `aiden_kb.record_preference(hypothesis_key, statement, context jsonb, feedback_id bigint, quote text, stance)`：僅引用已存在真實 feedback；stance 為 support／oppose，quote 必須是實際回饋子字串。假說保留情境、證據 ID與反例，依 06 寫後重讀。
 - `aiden_kb.get_preferences(brew_context jsonb default {})`：只取情境相符的假說，回傳支持／反對feedback ID與原話證據。信心由對話依證據保守說明為暫定／多次支持，不宣稱有獨立數值confidence欄位。
 
